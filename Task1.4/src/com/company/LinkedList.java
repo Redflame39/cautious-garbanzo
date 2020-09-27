@@ -37,13 +37,13 @@ public class LinkedList<E> {
         return current.item;
     }
 
-    public E get(int pos) {
+    public Node<E> get(int pos) {
         Node<E> current = first;
         for (int i = 0; i < pos; i++) {
             if (current.next == null) return null;
             else current = current.next;
         }
-        return current.item;
+        return current;
     }
 
     public void setFirst(Node<E> first) {

@@ -9,6 +9,7 @@ public class Main {
         boolean flag = true;
         LinkedList<Integer> list = new LinkedList<>();
         SingleList listSpec = new SingleList();
+        Iterator<Integer> iter = new Iterator<>(list);
 
         do {
             System.out.println("1.Добавить \n2.Удалить \n3.Вывести общий список \n4.Вывести список без спецслужб" +
@@ -33,13 +34,19 @@ public class Main {
                     break;
 
                 case 2:
+                    iter.reset();
+                    while (iter.getCurrent() != null) {
+                        System.out.println(iter.getCurrent().item + " " + iter.getCurrent().type);
+                        iter.nextNode();
+                    }
+                    System.out.println("\n");
                     System.out.println("Порядковый номер удаляемого ");
                     number = in.nextInt();
                     list.deleteIndex(number);
                     break;
 
                 case 3:
-                    Iterator<Integer> iter = new Iterator<>(list);
+                    iter.reset();
                     while (iter.getCurrent() != null) {
                         System.out.println(iter.getCurrent().item + " " + iter.getCurrent().type);
                         iter.nextNode();
@@ -54,11 +61,9 @@ public class Main {
                     break;
 
                 case 5:
-                    Iterator<Integer> iterSpec = new Iterator<>(list);
-                    while (iterSpec.getCurrent() != null) {
-                        if (iterSpec.getCurrent().type.equals(PhoneType.OFFICIAL))
-                            listSpec.add(iterSpec.getCurrent().item, iterSpec.getCurrent().type);
-                        iterSpec.nextNode();
+                    for (int i = list.size()-1; i >= 0; i--) {
+                        if (list.get(i).type.equals(PhoneType.SUBSCRIBER))
+                            listSpec.add(list.get(i).item, list.get(i).type);
                     }
                     System.out.println("\n");
                     break;
